@@ -33,3 +33,19 @@ RDEPENDS_${PN}-efi = " \
 do_install_append() {
   rm ${D}/usr/share/pkgconfig/xencall.pc
 }
+
+do_deploy_append() {
+
+	if [ -f ${D}/boot/xen ]; then
+		uboot-mkimage -A arm64 -C none -T kernel -a 0x02000000 \
+		-e 0x02000000 -n "XEN" -d ${D}/boot/xen \
+		${D}/boot/xen-${MACHINE}.uImage
+	fi
+
+	if [ -f ${D}/boot/xen-${MACHINE}.uImage ]; then
+		install -m 0644 ${D}/boot/xen-${MACHINE}.uImage ${DEPLOYDIR}/xen-${MACHINE}.uImage
+	fi
+	# remove unneeded files
+	rm ${DEPLOYDIR}/xen-${MACHINE}
+	rm ${DEPLOYDIR}/xen-${MACHINE}.efi
+}
