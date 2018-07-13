@@ -8,6 +8,13 @@ SRC_URI = "git://xenbits.xen.org/xen.git;protocol=git;nobranch=1;name=xen"
 SRCREV = "${AUTOREV}"
 XEN_REL="4.10.0"
 
+SRC_URI += "\
+    file://0001-xen-arm-earlyprintk-configuration-for-rk3399-boards.patch \
+    file://0001-xen-drivers-char-console.c-icrease-ring-size.patch \
+    "
+
+EXTRA_OEMAKE += " CONFIG_QEMU_XEN=n CONFIG_DEBUG=y debug=y CONFIG_EARLY_PRINTK=rk3399"
+
 FILES_${PN}-devd += "\
     ${systemd_unitdir}/system/xendriverdomain.service \
     "

@@ -1,0 +1,38 @@
+From 8fd552861ec00c319f613d92d00a72f2afd821bf Mon Sep 17 00:00:00 2001
+From: Ihor Matushchak <ihor.matushchak@globallogic.com>
+Date: Thu, 31 May 2018 14:58:09 +0300
+Subject: [PATCH] xen:arm:earlyprintk configuration for rk3399 boards
+
+Signed-off-by: Ihor Matushchak <ihor.matushchak@globallogic.com>
+---
+ docs/misc/arm/early-printk.txt | 1 +
+ xen/arch/arm/Rules.mk          | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/docs/misc/arm/early-printk.txt b/docs/misc/arm/early-printk.txt
+index 20a8af8..8664160 100644
+--- a/docs/misc/arm/early-printk.txt
++++ b/docs/misc/arm/early-printk.txt
+@@ -43,6 +43,7 @@ the name of the machine:
+   - midway: printk with the pl011 on Calxeda Midway processors
+   - omap5432: printk with UART3 on TI OMAP5432 processors
+   - rcar3: printk with SCIF2 on Renesas R-Car Gen3 processors
++  - rk3399: printk with 8250 on Rockchip rk3399 processors
+   - seattle: printk with pl011 for AMD Seattle processor
+   - sun6i: printk with 8250 on Allwinner A31 processors
+   - sun7i: printk with 8250 on Allwinner A20 processors
+diff --git a/xen/arch/arm/Rules.mk b/xen/arch/arm/Rules.mk
+index b66c19f..027bf10 100644
+--- a/xen/arch/arm/Rules.mk
++++ b/xen/arch/arm/Rules.mk
+@@ -46,6 +46,7 @@ EARLY_PRINTK_vexpress       := pl011,0x1c090000
+ EARLY_PRINTK_xgene-mcdivitt := 8250,0x1c021000,2
+ EARLY_PRINTK_xgene-storm    := 8250,0x1c020000,2
+ EARLY_PRINTK_zynqmp         := cadence,0xff000000
++EARLY_PRINTK_rk3399         := 8250,0xff1a0000,2
+ 
+ ifneq ($(EARLY_PRINTK_$(CONFIG_EARLY_PRINTK)),)
+ EARLY_PRINTK_CFG := $(subst $(comma), ,$(EARLY_PRINTK_$(CONFIG_EARLY_PRINTK)))
+-- 
+2.7.4
+
