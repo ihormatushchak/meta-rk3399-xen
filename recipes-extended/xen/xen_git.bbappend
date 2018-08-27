@@ -13,14 +13,45 @@ SRC_URI += "\
     file://0001-xen-drivers-char-console.c-icrease-ring-size.patch \
     "
 
+EXTRA_OECONF += " \
+    --enable-blktap2 \
+    "
+
 EXTRA_OEMAKE += " CONFIG_QEMU_XEN=n CONFIG_DEBUG=y debug=y CONFIG_EARLY_PRINTK=rk3399"
 
 FILES_${PN}-devd += "\
     ${systemd_unitdir}/system/xendriverdomain.service \
     "
 
+FILES_${PN}-pkgconfig = "\
+    ${datadir}/pkgconfig \
+    "
+
+FILES_${PN}-xendiag += " \
+    ${sbindir}/xen-diag \
+    "
+
+FILES_${PN}-libxentoolcore = "${libdir}/libxentoolcore.so.*"
+FILES_${PN}-libxentoolcore-dev = "${libdir}/libxentoolcore.so"
+
+FILES_${PN}-base += " \
+    ${localstatedir}/lib/xen \
+    "
+
 SYSTEMD_SERVICE_${PN}-devd = "\
     xendriverdomain.service \
+    "
+
+SYSTEMD_SERVICE_${PN}-xencommons_remove += " \
+    xenstored.socket \
+    xenstored_ro.socket \
+"
+
+PACKAGES_append = "\
+    ${PN}-libxentoolcore \
+    ${PN}-libxentoolcore-dev \
+    ${PN}-pkgconfig \
+    ${PN}-xendiag \
     "
 
 SYSTEMD_PACKAGES += "${PN}-devd"
