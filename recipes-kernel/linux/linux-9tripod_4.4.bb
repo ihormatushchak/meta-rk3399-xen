@@ -5,9 +5,9 @@ require recipes-kernel/linux/linux-yocto.inc
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}/:"
 COMPATIBLE_MACHINE = "ibox3399"
 
-KERNEL_9TRIPOD_URL = "git://github.com/SiennaStellar/k9tripod.git"
+KERNEL_9TRIPOD_URL = "git://github.com/ihormatushchak/k9tripod.git"
 BRANCH = "kernel-4.4.52-9tripod-devel"
-SRCREV = "71b3f23c98a94aa043c054d933562d8248b53a28"
+SRCREV = "1b147c2b494fd2ec84905b77f29758aeb380e048"
 
 SRC_URI = "${KERNEL_9TRIPOD_URL};protocol=git;nocheckout=1;branch=${BRANCH}"
 
