@@ -28,6 +28,9 @@ IMAGE_INSTALL += "\
 IMAGE_INSTALL += "\
 	libdrm \
 	libdrm-tests \
+	wayland \
+	weston \
+	weston-init \
 "
 
 # add 100MB to rootfs
