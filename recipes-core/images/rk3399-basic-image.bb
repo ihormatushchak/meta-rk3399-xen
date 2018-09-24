@@ -24,5 +24,11 @@ IMAGE_INSTALL += "\
 	xen-xenstore \
 	xen-scripts-network \
 "
+
+IMAGE_INSTALL += "\
+	libdrm \
+	libdrm-tests \
+"
+
 # add 100MB to rootfs
 IMAGE_ROOTFS_EXTRA_SPACE = "102400"
